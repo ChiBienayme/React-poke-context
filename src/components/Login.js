@@ -31,7 +31,7 @@ export default function Login() {
         })}
       />
       <p>Invalid user name</p>
-      {errors.userName && <span>Please enter a username</span>}
+      {errors.userName && <span>Maximum 15 characters</span>}
 
         {/* Password */}
       <input
@@ -43,7 +43,7 @@ export default function Login() {
         })}
       />
       <p>Invalid password</p>
-      {errors.password && <span>Please enter a password</span>}
+      {errors.password && <span>Minimum 6 characters</span>}
 
       
       <input type="submit" value="SE CONNECTER"/>
