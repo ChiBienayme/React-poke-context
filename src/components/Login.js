@@ -1,10 +1,19 @@
-
+import React , { useState, createContext, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 // => have to use the version npm i react-router-dom@5.3.0
 
+
+export const UserContext = createContext({
+  isLogged: true,
+});
+
+
 export default function Login() {
   const history = useHistory();
+
+  // const [isLogged, setLogged] = useState(false);
+  const { isLogged, setLogged } = useContext(UserContext);
 
   const {
     register,
@@ -12,13 +21,14 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const setAuth = (data) => {
     //go to Home
     history.push('/');
+    setLogged( isLogged );  
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(setAuth)}>
       <h1>Login</h1>
 
       {/* UserName */}
@@ -46,7 +56,7 @@ export default function Login() {
       {errors.password && <span>Minimum 6 characters</span>}
 
       
-      <input type="submit" value="SE CONNECTER"/>
+      <button className="button" type="submit" onClick={setAuth}>SE CONNECTER</button>
     </form>
   );
 }

@@ -28,9 +28,9 @@ function App() {
     return ( 
       <UserContext.Provider value={value}>
         <BrowserRouter>
-          <nav className='nav nav-tabs'>
-              <Link className="nav-link" to="/"> Home  </Link>
-              <Link className="nav-link" to="/login"> Login  </Link>
+          <nav className='nav navbar-nav flex-row-reverse d-flex'>
+              <Link className="text-link" to="/"> Home  </Link>
+              <Link className="text-link" to="/login"> Login  </Link>
               
           </nav>
 

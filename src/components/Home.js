@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+
 function randomNumber() {
   return Math.floor(Math.random() * 875) + 1;
 }
@@ -36,11 +37,11 @@ export default function Home() {
    
     return  pokemon ? ( 
             <>
-              <p>Name: {pokemon.name}</p>
-              <p>Height: {pokemon.height}</p>
-              <p>Weight: {pokemon.weight}</p>
-              {/* <p>Type: {pokemon.types[0].type.name}</p> */}
-              <button onClick={handleClick}> Get a new pokemon</button>
+              <p>Name : {pokemon.name}</p>
+              <p>Height : {pokemon.height}</p>
+              <p>Weight : {pokemon.weight}</p>
+              <p>Type: {pokemon.types[0].type.name}</p>
+              <button className="button" onClick={handleClick}> Get a new pokemon</button>
             </>
           ) : ( 
             <div className="loader"> Loading.. </div>

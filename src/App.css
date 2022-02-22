@@ -2,14 +2,18 @@
   margin: 1px;
   padding: 3px;
 }
-.nav {
+ .nav {
   font-size: 24px;
   font-weight: 200;
   color: white;
+  padding: 10px;
+  margin: 10px;
 }
-.nav-link:hover {
-  color: black;
-  background-color: rgb(214, 229, 252);
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+  color:white;
 }
 
 .App {
@@ -148,4 +152,3 @@ input[type="submit"]:active {
 .preact:hover {
   opacity: 1;
 }
-
