@@ -1,19 +1,15 @@
-import React , { useState, createContext, useContext } from 'react';
+import React , { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 // => have to use the version npm i react-router-dom@5.3.0
 
-
-export const UserContext = createContext({
-  isLogged: true,
-});
+import { UserContext } from "../App"
 
 
 export default function Login() {
   const history = useHistory();
 
-  // const [isLogged, setLogged] = useState(false);
-  const { isLogged, setLogged } = useContext(UserContext);
+  const {isLogged, setLogged}  = useContext(UserContext);
 
   const {
     register,
@@ -22,9 +18,13 @@ export default function Login() {
   } = useForm();
 
   const setAuth = (data) => {
-    //go to Home
-    history.push('/');
-    setLogged( isLogged );  
+    if ( isLogged === true  ) {
+      //go to Home
+      history.push('/');
+    } else {
+      console.log("Error");
+    }
+    
   }
 
   return (
