@@ -1,4 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
+import { Link } from "react-router-dom";
+import { UserContext } from '../App';
 
 
 function randomNumber() {
@@ -11,6 +13,7 @@ export default function Home() {
 
   const [pokemon, setPokemon] = useState();
   const [randomPokemon, setRamdomPokemon] = useState(1);
+  const {isLogged} = useContext(UserContext);
 
   useEffect(() => { 
     setTimeout(() => {
@@ -34,18 +37,29 @@ export default function Home() {
   const handleClick = () => {
     setRamdomPokemon(randomNumber());
   }
-   
+  
+  if (isLogged) {
     return  pokemon ? ( 
-            <>
-              <p>Name : {pokemon.name}</p>
-              <p>Height : {pokemon.height}</p>
-              <p>Weight : {pokemon.weight}</p>
-              <p>Type: {pokemon.types[0].type.name}</p>
-              <button className="button" onClick={handleClick}> Get a new pokemon</button>
-            </>
-          ) : ( 
-            <div className="loader"> Loading.. </div>
-          )  
+      <>
+        <h4>You are logged in</h4>
+        <p>Name : {pokemon.name}</p>
+        <p>Height : {pokemon.height}</p>
+        <p>Weight : {pokemon.weight}</p>
+        <p>Type: {pokemon.types[0].type.name}</p>
+        <button className="button" onClick={handleClick}> Get a new pokemon</button>
+      </>
+    ) : ( 
+      <div className="loader"> Loading.. </div>
+    )  
+  } else {
+    return(
+      <Link  to="/login">
+      <h1> Login </h1>
+      </Link>
+    
+    )
+  }
+    
 }
 
 

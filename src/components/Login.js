@@ -9,7 +9,7 @@ import { UserContext } from "../App"
 export default function Login() {
   const history = useHistory();
 
-  const {isLogged, setLogged}  = useContext(UserContext);
+  const {setAuth, isLogged}  = useContext(UserContext);
 
   const {
     register,
@@ -17,18 +17,19 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const setAuth = (data) => {
-    if ( isLogged === true  ) {
-      //go to Home
-      history.push('/');
-    } else {
-      console.log("Error");
-    }
-    
-  }
+  const onSubmit = (data) => {
+    setAuth(); 
+    console.log(data);    
+    history.push('/'); //go to homepage
+ 
+  };
 
-  return (
-    <form onSubmit={handleSubmit(setAuth)}>
+  return isLogged ? (
+    <div>
+        <button className="button" onClick={onSubmit}> Se déconnecter</button>
+    </div>
+  ) : (
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Login</h1>
 
       {/* UserName */}
@@ -55,8 +56,7 @@ export default function Login() {
       <p>Invalid password</p>
       {errors.password && <span>Minimum 6 characters</span>}
 
-      
-      <button className="button" type="submit" onClick={setAuth}>SE CONNECTER</button>
+      <button className="button" type="submit" >Se connecter</button>
     </form>
   );
 }
