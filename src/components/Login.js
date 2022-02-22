@@ -1,54 +1,53 @@
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 
-export function Login() {
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+// => have to use the version npm i react-router-dom@5.3.0
+
+export default function Login() {
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [data, setData] = useState("");
+  const onSubmit = (data) => {
+    //go to Home
+    history.push('/');
+  }
 
   return (
-    <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Login</h1>
 
+      {/* UserName */}
       <input
         type="text"
         placeholder="User Name"
         {...register("userName", {
-          required: "Required",
-          pattern: {
-            value: /^[A-Za-z]\w{,15}$/,
-            message: "Maximum 15 characters",
-          },
+          required: true,
+          maxLength: 15,
         })}
       />
-      <span>{errors.userName && errors.userName.message}</span>
       <p>Invalid user name</p>
+      {errors.userName && <span>Please enter a username</span>}
 
+        {/* Password */}
       <input
         type="password"
         placeholder="Password"
         {...register("password", {
-          required: "Required",
-          pattern: {
-            value: /^(?=.[0-9])(?=.[!@#$%^&])[a-zA-Z0-9!@#$%^&]{6,}$/,
-            message:
-              "Minimum 6 characters which contain at least 1 numeric digit and a special character",
-          },
+          required: true,
+          maxLength: 6,
         })}
       />
-      <span>{errors.password && errors.password.message}</span>
       <p>Invalid password</p>
+      {errors.password && <span>Please enter a password</span>}
 
-
-      <p>{data}</p>
-      <input type="submit" value="SE CONNECTER" />
+      
+      <input type="submit" value="SE CONNECTER"/>
     </form>
   );
 }
 
-export default Login;
