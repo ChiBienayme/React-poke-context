@@ -9,31 +9,34 @@ import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-export const UserContext = createContext({
-  isLogged: true,
-});
+export const UserContext = createContext();
 
-function App() {
+export default function App() {
   const [isLogged, setLogged] = useState(false);
 
   const setAuth = () => {
-    setLogged(() => ({
-      isLogged,
-      setLogged,
-    }));
+    setLogged((prevLogged) => !prevLogged);
+
+    // setLogged(!isLogged);
+    // if (isLogged === true) {
+    //   setLogged(false);
+    // } else {
+    //   setLogged(true);
+    // }
   };
 
-  // const value  = {
-  //   isLogged: false,
-  //   setAuth: false,
-  // }
+  const value  = {
+    isLogged: isLogged,
+    setAuth: setAuth,
+  }
 
     return ( 
-      <UserContext.Provider value={{isLogged, setAuth}}>
+      <UserContext.Provider value={value}>
         <BrowserRouter>
           <nav className='nav navbar-nav flex-row-reverse d-flex'>
               <Link className="text-link" to="/"> Home  </Link>
               <Link className="text-link" to="/login"> Login  </Link>
+              {/* <h2>Connecté : {isLogged.toString()}</h2> */}
               
           </nav>
 
@@ -46,10 +49,8 @@ function App() {
       </UserContext.Provider>
       
     )
-
   
 }
-export default App;
 
 
 

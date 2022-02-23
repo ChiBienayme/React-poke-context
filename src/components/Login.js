@@ -6,27 +6,24 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 
 export default function Login() {
-  const history = useHistory();
-
   const { setAuth, isLogged } = useContext(UserContext);
-
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = (_data) => {
     setAuth();
-    console.log(data);
+    // console.log(data);
     history.push("/"); //go to homepage
   };
 
-  return isLogged ? (
+  return  isLogged ? (
     <div>
-      <h3>You are logged in!</h3>
+      <h4>You are logged in! Do you want to log out?</h4>
       <button className="button" onClick={onSubmit}>
-        {" "}
         Log out
       </button>
     </div>
@@ -59,7 +56,6 @@ export default function Login() {
       {errors.password && <span>Minimum 6 characters</span>}
 
       <button className="button" type="submit">
-        {" "}
         Log in
       </button>
     </form>
