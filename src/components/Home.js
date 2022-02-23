@@ -64,6 +64,7 @@ export default function Home() {
         You should log in firstly
       </h3>
       <Link to="/login"> Login </Link>
+      
     </div>
   );
 }
