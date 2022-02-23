@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
-// Bootstrap
+// CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -17,16 +17,19 @@ function App() {
   const [isLogged, setLogged] = useState(false);
 
   const setAuth = () => {
-     setLogged( !isLogged );  
+    setLogged(() => ({
+      isLogged,
+      setLogged,
+    }));
   };
 
-  const value  = {
-    isLogged: false,
-    setAuth: false,
-  }
+  // const value  = {
+  //   isLogged: false,
+  //   setAuth: false,
+  // }
 
     return ( 
-      <UserContext.Provider value={value}>
+      <UserContext.Provider value={{isLogged, setAuth}}>
         <BrowserRouter>
           <nav className='nav navbar-nav flex-row-reverse d-flex'>
               <Link className="text-link" to="/"> Home  </Link>

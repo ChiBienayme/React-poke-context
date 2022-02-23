@@ -2,6 +2,10 @@ import React, {useEffect, useState, useContext} from 'react';
 import { Link } from "react-router-dom";
 import { UserContext } from '../App';
 
+//CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../App.css";
+
 
 function randomNumber() {
   return Math.floor(Math.random() * 875) + 1;
@@ -53,9 +57,9 @@ export default function Home() {
     )  
   } else {
     return(
-      <Link  to="/login">
-      <h1> Login </h1>
-      </Link>
+      
+      <h3 className='text-white flex-row-reverse'> You need to log in firstly </h3>
+      
     
     )
   }
